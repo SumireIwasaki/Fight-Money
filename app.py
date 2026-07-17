@@ -4,6 +4,7 @@ import sqlite3
 import qrcode
 import io
 import base64
+import os
 
 app = Flask(__name__)
 app.secret_key = "abc123"
@@ -606,6 +607,6 @@ def family_qr():
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
-        port=5003,
+        port=int(os.environ.get("PORT", 5003)),
         debug=True
     )
