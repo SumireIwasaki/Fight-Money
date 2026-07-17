@@ -1,0 +1,314 @@
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    background: url("parent.JPG");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+    padding-bottom: 100px;
+
+    font-family: sans-serif;
+}
+
+.container{
+    width: calc(100% - 24px);
+    max-width: 430px;
+
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 120px;
+}
+
+/* ---------- ヘッダー ---------- */
+
+header{
+    width: 100%;
+    height: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ECE6D8;
+    border-bottom: 2px solid #b2b0aa;
+}
+
+.logo{
+    width: 65px;
+    height: auto;
+    display: block;
+}
+
+/* ---------- タイトル ---------- */
+
+.page-title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+/* ---------- 入力 ---------- */
+
+.input-area{
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto 40px;
+}
+
+.title-row{
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) 1fr;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+.input-card{
+    width: 100%;
+
+    background: white;
+    border-radius: 30px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) 1fr;
+    align-items: center;
+
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.input-card input{
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 20px;
+}
+
+.input-card input:last-child{
+    border-left: 2px solid #ccc;
+    padding-left: 20px;
+}
+
+/* ---------- ＋ボタン ---------- */
+
+.add-btn{
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+    border: 2px solid #444;
+    background: white;
+
+    font-size: 38px;
+
+    margin: 25px auto;
+    display: block;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.add-btn:hover{
+    transform: scale(1.1);
+}
+
+/* ---------- 一覧 ---------- */
+
+.history{
+    width: 100%;
+    max-width: 430px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin: 0 auto;
+}
+
+.history-card{
+    width: 100%;
+
+    background: white;
+    border-radius: 25px;
+    padding: 20px 25px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) 1fr;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,.1);
+
+    font-size: 20px;
+}
+
+.history-card div{
+    min-width: 0;
+    word-break: break-word;
+}
+
+.history-card div:last-child{
+    text-align: right;
+    font-weight: bold;
+}
+
+/* ---------- 戻るボタン ---------- */
+
+.money-btn{
+    display: block;
+
+    width: 80%;
+    max-width: 260px;
+
+    margin: 25px auto 90px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 30px;
+    background: white;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ---------- フッター ---------- */
+
+.bottom-nav{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 75px;
+
+    background: #f5f5f5;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 8px 0;
+    border-top: 1px solid #b2b0aa;
+
+    z-index: 100;
+}
+
+.bottom-nav a{
+    text-decoration: none;
+    color: #999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-nav img{
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.bottom-nav p{
+    margin: 3px 0 0;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* ===== スマホ用 ===== */
+
+@media screen and (max-width: 430px){
+
+    .container{
+        width: calc(100% - 20px);
+    }
+
+    header{
+        height: 62px;
+    }
+
+    .logo{
+        width: 58px;
+    }
+
+    .page-title{
+        font-size: 24px;
+        margin: 20px 0;
+    }
+
+    .title-row{
+        font-size: 14px;
+        padding: 0 12px;
+    }
+
+    .input-area{
+        margin-bottom: 30px;
+    }
+
+    .input-card{
+        padding: 15px;
+        border-radius: 22px;
+    }
+
+    .input-card input{
+        font-size: 16px;
+    }
+
+    .input-card input:last-child{
+        padding-left: 12px;
+    }
+
+    .add-btn{
+        width: 58px;
+        height: 58px;
+        font-size: 32px;
+        margin: 20px auto;
+    }
+
+    .history{
+        gap: 12px;
+    }
+
+    .history-card{
+        padding: 15px;
+        border-radius: 18px;
+        font-size: 16px;
+    }
+
+    .money-btn{
+        width: 85%;
+        margin-bottom: 85px;
+    }
+
+    .bottom-nav{
+        height: 70px;
+    }
+
+    .bottom-nav img{
+        width: 34px;
+        height: 34px;
+    }
+
+    .bottom-nav p{
+        font-size: 11px;
+    }
+}

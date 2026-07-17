@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{url_for('static',filename='login.css')}}?v=20260717">
+</head>
+<body>
+    <div class="language">
+        <span>言語</span>
+        <button>🇯🇵</button>
+    </div>
+
+    <div class="login-container">
+
+        <img src="{{ url_for('static', filename='images/logo_1.png') }}"
+             alt="ロゴ"
+             class="logo">
+
+		<div class="role-switch">
+    			<button type="button" id="parentBtn" class="active">親</button>
+    			<button type="button" id="childBtn">子供</button>
+		</div>
+
+      	<div class="login-card">
+            <h2>ログイン</h2>
+
+		{% if error %}
+		<p class="error">{{error}}</p>
+		{% endif %}
+		
+		<form method="POST"  action="/login">
+			<input type="hidden" name="role" id="role" value="parent">
+			<input type="email" name="email" placeholder="メールアドレス" required>
+			<input type="password" name="password" placeholder="パスワード" required>
+			<button type="submit">ログイン</button>
+		</form>
+      	</div>
+	<a href="{{url_for('touroku')}}">
+            新規会員登録
+      </a>
+    </div>
+<script>
+
+const parentBtn=document.getElementById("parentBtn");
+const childBtn=document.getElementById("childBtn");
+const role=document.getElementById("role");
+
+parentBtn.onclick=function(){
+
+    role.value="parent";
+
+    parentBtn.classList.add("active");
+    childBtn.classList.remove("active");
+
+}
+
+childBtn.onclick=function(){
+
+    role.value="child";
+
+    childBtn.classList.add("active");
+    parentBtn.classList.remove("active");
+
+}
+
+</script>
+</body>
+</html>

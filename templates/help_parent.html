@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お手伝い管理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='help_parent.css') }}?v=20260717">
+</head>
+<body>
+
+<!-- ヘッダー -->
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    </header>
+
+    <h1 class="page-title">お手伝い管理</h1>
+
+
+<div class="container">
+
+    <!-- 追加フォーム -->
+    <form method="POST">
+
+        <div class="input-card">
+
+            <label>お手伝い名 :</label>
+            <input
+                type="text"
+                name="title"
+                placeholder="例）お皿洗い"
+                required>
+		<br>
+
+            <label>報酬（円）:</label>
+            <input
+                type="number"
+                name="reward"
+                placeholder="300"
+                required>
+		<br>
+
+            <label>色 :</label>
+
+            <!-- 保存用 -->
+            <input
+                type="hidden"
+                name="color"
+                id="colorInput"
+                value="#FFD54F">
+
+            <!-- 色選択 -->
+            <div class="color-list">
+
+                <div class="color selected"
+                     style="background:#FFD54F"
+                     data-color="#FFD54F"></div>
+
+                <div class="color"
+                     style="background:#81C784"
+                     data-color="#81C784"></div>
+
+                <div class="color"
+                     style="background:#64B5F6"
+                     data-color="#64B5F6"></div>
+
+                <div class="color"
+                     style="background:#EF5350"
+                     data-color="#EF5350"></div>
+
+                <div class="color"
+                     style="background:#BA68C8"
+                     data-color="#BA68C8"></div>
+
+                <div class="color"
+                     style="background: #FF8A65"
+                     data-color="#FF8A65"></div>
+
+                <div class="color"
+                     style="background: #455A64"
+                     data-color="#455A64"></div>
+
+            </div>
+
+        </div>
+
+        <button class="add-btn" type="submit">
+            ＋ お手伝いを追加
+        </button>
+
+    </form>
+
+    <!-- 登録済み一覧 -->
+    <div class="help-list">
+
+        {% for help in help_list %}
+
+        <div class="help-card">
+
+            <div class="left">
+
+                <span class="dot" style="background: {{help['color']}};">
+                </span>
+
+                <div>
+                    <div class="title">
+                        {{help["title"]}}
+                    </div>
+
+                    <div class="reward">
+                        ¥{{help["reward"]}}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right">
+
+                <a href="/edit_help/{{help['id']}}" class="edit">
+                    ✏️
+                </a>
+
+                <a href="/delete_help/{{help['id']}}" class="delete">
+                    🗑️
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <button class="return" onclick="location.href='/parent_home'">＜ Home</button>
+    <footer class="bottom-nav">
+		<a href="{{url_for('home')}}">
+			<img src="{{url_for('static',filename='images/clender.png')}}" alt="マイシフト" class="myshift">
+			<p>マイシフト</p>
+		</a>
+
+		<a href="{{url_for('money')}}">
+			<img src="{{url_for('static',filename='images/money.png')}}" alt="おこづかい" class="okane">
+			<p>おこづかい</p>
+		</a>
+
+	</footer>
+
+</div>
+
+<script>
+
+const colors = document.querySelectorAll(".color");
+
+colors.forEach(color => {
+
+    color.onclick = function(){
+
+        document.querySelectorAll(".color").forEach(c=>{
+            c.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        document.getElementById("colorInput").value =
+            this.dataset.color;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

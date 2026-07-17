@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Home_child.css') }}?v=20260717">
+	<title>{{today}}</title>
+	<!--カレンダーの見た目（これがないとただのテキストになる）-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css">
+</head>
+<body>
+	<header>
+        <form action="/logout" method="POST" class="logout-form">
+        <button type="submit" class="logout-btn">
+            ＜ ログアウト
+        </button>
+        </form>
+
+		<img src="{{ url_for('static', filename='images/logo.png') }}" alt="ロゴ" class="logo">
+	</header>
+    
+	<!--カレンダーの本体機能（月表示・クリック・切り替え-->	
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+	<div id="calendar"></div>
+	<!--①htmlが全部読み込まれてから動く。これが無いとまだ要素がなくてエラーになる。
+	    ②<div id>に対してカレンダーを作る。-->
+	
+	<footer class="bottom-nav">
+		<a href="{{url_for('home')}}">
+			<img src="{{url_for('static',filename='images/clender.png')}}" alt="マイシフト" class="myshift">
+			<p>マイシフト</p>
+		</a>
+
+		<a href="{{url_for('money')}}">
+			<img src="{{url_for('static',filename='images/money.png')}}" alt="おこづかい" class="okane">
+			<p>おこづかい</p>
+		</a>
+
+	</footer>
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    let selectedDate = "";
+
+    const calendar = new FullCalendar.Calendar(
+        document.getElementById("calendar"),
+        {
+            initialView: "dayGridMonth",
+            locale: "ja",
+            events: "/get_calendar",
+            eventContent:function(arg){
+
+    return{
+        html:`
+            <div
+                style="
+                    width:12px;
+                    height:12px;
+                    background:${arg.event.backgroundColor};
+                    border-radius:50%;
+                    margin:auto;
+                ">
+            </div>
+        `
+    };
+
+},
+
+            dayCellContent: function (arg) {
+                return {
+                    html: '<div class="day">' + arg.date.getDate() + "</div>"
+                };
+            },
+
+            dateClick: function (info) {
+
+                // 前に選択した日付の色を消す
+                document.querySelectorAll(".selected-day").forEach(el => {
+                    el.classList.remove("selected-day");
+                });
+
+                // 今クリックした日付に色をつける
+                info.dayEl.classList.add("selected-day");
+
+                // 選択した日付を保存
+                selectedDate = info.dateStr;
+
+                const d = new Date(selectedDate);
+
+                const formatted =
+                    d.getFullYear() + "年" +
+                    (d.getMonth() + 1) + "月" +
+                    d.getDate() + "日";
+
+                document.getElementById("selected-date").innerText = formatted;
+
+                // Flaskから予定取得
+                fetch("/get_schedule?date=" + selectedDate)
+                    .then(response => response.json())
+                    .then(tasks => {
+                        console.log(tasks);
+
+                        const list = document.getElementById("task-list");
+                        list.innerHTML = "";
+
+                        if (tasks.length > 0) {
+
+                            tasks.forEach(task => {
+
+                                const li = document.createElement("li");
+
+                                li.innerHTML = `
+                                    <div class="task-card">
+                                        <span class="task-dot" style="background:${task.color};"></span>
+                                        <div class="task-info">
+                                            <div class="task-name">
+                                                ${task.title}
+                                            </div>
+                                            <div>
+                                                報酬：${task.reward}円
+                                            </div>
+                                            <div>
+                                                状態：${task.status}
+                                            </div>
+                                            <button class="complete-btn" data-id="${task.id}">
+                                                完了
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+
+                                list.appendChild(li);
+                            });
+
+                        } else {
+
+                            const li = document.createElement("li");
+                            li.textContent = "予定なし";
+                            list.appendChild(li);
+
+                        }
+
+                    });
+
+            }
+
+        }
+    );
+    fetch("/get_calendar")
+.then(response => response.json())
+.then(events => {
+
+    events.forEach(event => {
+
+        calendar.addEvent({
+
+            start: event.date,
+
+            display: "background",
+
+            backgroundColor: event.color,
+
+            borderColor: event.color
+
+        });
+
+    });
+
+});
+    calendar.render();
+
+    // ＋シフト追加ボタン
+    document.getElementById("addShiftBtn").addEventListener("click", function () {
+
+        if (selectedDate == "") {
+            alert("日付を選択してください！");
+            return;
+        }
+
+        window.location.href = "/add_shift?date=" + selectedDate;
+
+    });
+
+});
+
+// チェックボタン
+document.addEventListener("click", function (e) {
+
+    if (e.target.classList.contains("complete-btn")) {
+        //help_logのidを取得
+        const helpLogId=e.target.dataset.id;
+        fetch("/complete_help",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                id:helpLogId
+            })
+        })
+        .then(response=>response.json())
+        .then(data=>{
+            alert(data.message);
+            //表示を更新
+            location.reload();
+        });
+    }
+});
+</script>
+	<div class="container">
+	
+	<div id="schedule-card">
+		<h3 id="selected-date">日付を選択してください</h3>
+		<ul id="task-list"></ul>
+		
+		<button id="addShiftBtn" class="add-task" type="button">
+			+シフトを追加
+		</button>
+		
+	</div>
+	<button class="money-btn" onclick="location.href='/add_money'">
+		収入を管理
+	</button>
+	</div>
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>収入管理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Money_child_2.css') }}?v=20260717">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    </header>
+
+    <h2 class="page-title">収入管理</h2>
+
+    <div class="input-area">
+
+        <form action="/add_money" method="POST">
+
+            <div class="title-row">
+                <div>使い道</div>
+                <div>金額</div>
+            </div>
+
+            <div class="input-card">
+
+                <input
+                    type="text"
+                    name="memo"
+                    placeholder="入力"
+                    required>
+
+                <input
+                    type="number"
+                    name="amount"
+                    placeholder="¥ 入力"
+                    required>
+
+            </div>
+
+            <button class="add-btn" type="submit">＋</button>
+
+        </form>
+
+    </div>
+
+    <div class="history">
+
+        {% for item in spend_list %}
+        <div class="history-card">
+
+            <div>{{item["memo"]}}</div>
+
+            <div>¥{{item["amount"]}}</div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    	<button class="money-btn" onclick="location.href='/money'">
+		＜ おこづかいを見る
+	</button>
+
+</div>
+
+<footer class="bottom-nav">
+
+    <a href="{{url_for('home')}}">
+        <img src="{{url_for('static',filename='images/clender.png')}}">
+        <p>マイシフト</p>
+    </a>
+
+    <a href="{{url_for('money')}}">
+        <img src="{{url_for('static',filename='images/money.png')}}">
+        <p>おこづかい</p>
+    </a>
+
+</footer>
+
+</body>
+</html>

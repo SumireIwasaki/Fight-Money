@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='add_shift.css') }}?v=20260717">
+<title>シフト追加</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>シフト追加</h1>
+    <form action="/save_shift" method="POST">
+	<input type="hidden" name="help_id" id="help_id">
+	<input type="hidden" name="done_date" value="{{ selected_date }}">
+   
+    {% for help in help_list %}
+
+    <div class="help-card" data-id="{{ help['id'] }}">
+
+        <div class="left">
+
+            <span class="dot" style="background:{{ help['color'] }};">
+            </span>
+
+            <div>
+
+                <div class="title">
+                    {{ help["title"] }}
+                </div>
+
+                <div class="reward">
+                    ¥{{ help["reward"] }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>   <!-- ← help-card を閉じる -->
+
+    {% endfor %}
+    <button class="save_btn" type="submit">保存</button>
+     
+    </form>
+
+
+</div>
+<script>
+
+const cards = document.querySelectorAll(".help-card");
+const helpId = document.getElementById("help_id");
+
+cards.forEach(card => {
+
+    card.addEventListener("click", function(){
+
+        // 全部の選択を解除
+        cards.forEach(c=>{
+            c.classList.remove("selected");
+        });
+
+        // 選択したカード
+        this.classList.add("selected");
+
+        // hiddenにhelp_idを入れる
+        helpId.value = this.dataset.id;
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

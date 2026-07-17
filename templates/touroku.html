@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{url_for('static',filename='touroku.css')}}?v=20260717">
+    <title>新規会員登録</title>
+</head>
+<body>
+
+<h2>新規会員登録</h2>
+
+<form method="POST" action="/touroku">
+
+    <input type="text"
+           name="name"
+           placeholder="名前"
+           required>
+
+    <br><br>
+
+    <input type="email"
+           name="email"
+           placeholder="メールアドレス"
+           required>
+
+    <br><br>
+
+    <input type="password"
+           name="password"
+           placeholder="パスワード"
+           required>
+
+    <br><br>
+
+    <select name="role">
+        <option value="parent">親</option>
+        <option value="child">子供</option>
+    </select>
+
+    <br><br>
+
+    <div id="familyBox">
+
+    <label>家族コード</label>
+
+    <input
+        type="number"
+        name="family_id"
+        value="{{request.args.get('family_id','')}}">
+
+    </div>
+
+    <br><br>
+
+    <button type="submit">
+        登録
+    </button>
+
+</form>
+
+<script>
+
+const role = document.querySelector("select[name='role']");
+const familyBox = document.getElementById("familyBox");
+
+function changeRole(){
+
+    if(role.value=="parent"){
+        familyBox.style.display="none";
+    }else{
+        familyBox.style.display="block";
+    }
+
+}
+
+changeRole();
+
+role.onchange = changeRole;
+
+</script>
+
+</body>
+</html>

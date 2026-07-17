@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Home_child_1.css') }}?v=20260717">
+    <title>おこづかい</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ロゴ" class="logo">
+        </header>
+
+        <div class="month-bar">
+            <button id="prevMonth">＜</button>
+
+            <div class="month">
+                {{ year }}年{{ month }}月
+            </div>
+
+            <button id="nextMonth">＞</button>
+        </div>
+
+        <div class="top-area">
+
+            <div class="tab">
+                <button id="monthBtn" class="{% if mode == 'month' %}active{% endif %}">
+                    月
+                </button>
+
+                <button id="yearBtn" class="{% if mode == 'year' %}active{% endif %}">
+                    年
+                </button>
+            </div>
+
+            <div class="circle">
+                <div class="inner-circle">
+                    <p>今日までのおこづかい</p>
+                    <h2>¥{{ total_money }}</h2>
+                </div>
+            </div>
+
+            <div class="work-count">
+                お手伝い日数
+                <span>{{ total_days }}</span>日
+            </div>
+
+        </div>
+
+        <div class="list">
+
+            <div class="koumoku">
+                <div>お手伝い</div>
+                <div>日数</div>
+                <div class="okozu">おこづかい</div>
+            </div>
+
+            {% if mode == "month" %}
+
+                {% for help in help_list %}
+                <div class="item">
+                    <div>{{ help["title"] }}</div>
+                    <div>{{ help["days"] }}</div>
+                    <div>¥{{ help["reward"] }}</div>
+                </div>
+                {% endfor %}
+
+            {% else %}
+
+                {% for help in help_list %}
+                <div class="item">
+                    <div>{{ help["title"] }}月</div>
+                    <div>-</div>
+                    <div>¥{{ help["reward"] }}</div>
+                </div>
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+
+        <div class="total">
+            <div>合計</div>
+            <div>{{ total_days }}日</div>
+            <div>¥{{ total_money }}</div>
+        </div>
+
+    </div>
+
+    <button class="money-btn" onclick="location.href='/add_money'">
+        収入を管理
+    </button>
+
+    <footer class="bottom-nav">
+
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/clender.png') }}" alt="マイシフト" class="myshift">
+            <p>マイシフト</p>
+        </a>
+
+        <a href="{{ url_for('money') }}">
+            <img src="{{ url_for('static', filename='images/money.png') }}" alt="おこづかい" class="okane">
+            <p>おこづかい</p>
+        </a>
+
+    </footer>
+
+    <script>
+
+        const year = {{ year }};
+        const month = {{ month }};
+
+        document.getElementById("prevMonth").onclick = function () {
+
+            let y = year;
+            let m = month - 1;
+
+            if (m === 0) {
+                m = 12;
+                y--;
+            }
+
+            location.href = `/money?mode={{ mode }}&year=${y}&month=${m}`;
+        };
+
+        document.getElementById("nextMonth").onclick = function () {
+
+            let y = year;
+            let m = month + 1;
+
+            if (m === 13) {
+                m = 1;
+                y++;
+            }
+
+            location.href = `/money?mode={{ mode }}&year=${y}&month=${m}`;
+        };
+
+        document.getElementById("monthBtn").onclick = function () {
+            location.href = `/money?mode=month&year=${year}&month=${month}`;
+        };
+
+        document.getElementById("yearBtn").onclick = function () {
+            location.href = `/money?mode=year&year=${year}&month=${month}`;
+        };
+
+        const target = Number("{{ target }}");
+        const currentMoney = Number("{{ total_money }}");
+
+        const percent = currentMoney / target;
+        const degree = percent * 360;
+
+        document.querySelector(".circle").style.background =
+            `conic-gradient(
+                #f2ebad 0deg ${degree}deg,
+                #e5e5e5 ${degree}deg 360deg
+            )`;
+
+    </script>
+
+</body>
+
+</html>

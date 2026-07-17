@@ -1,0 +1,180 @@
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    min-height: 100vh;
+
+    background: url("child.JPG");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: sans-serif;
+}
+
+/* 言語切り替え */
+.language{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ログイン全体 */
+.login-container{
+    width: calc(100% - 24px);
+    max-width: 430px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 110px 0 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ロゴ */
+.logo{
+    width: 90px;
+    height: auto;
+    margin-bottom: 32px;
+}
+
+/* 親・子切り替え */
+.role-switch{
+    display: flex;
+
+    background: #e8e8e8;
+    border-radius: 30px;
+    overflow: hidden;
+
+    margin-bottom: 30px;
+}
+
+.role-switch button{
+    width: 90px;
+    height: 45px;
+
+    border: none;
+    background: transparent;
+
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.role-switch .active{
+    background: white;
+    border-radius: 30px;
+    color: #f0b429;
+}
+
+/* ログインカード */
+.login-card{
+    width: 100%;
+    max-width: 320px;
+
+    background: white;
+    border-radius: 30px;
+
+    padding: 30px;
+    text-align: center;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2{
+    margin: 0 0 25px;
+    font-size: 24px;
+}
+
+.login-card input{
+    width: 100%;
+
+    padding: 15px;
+    margin-bottom: 15px;
+
+    border: none;
+    border-radius: 8px;
+    background: #f3f3f3;
+
+    font-size: 16px;
+}
+
+/* 新規登録 */
+.register{
+    display: inline-block;
+    margin-top: 30px;
+
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ===== スマホ用 ===== */
+@media screen and (max-width: 430px){
+
+    .language{
+        top: 14px;
+        right: 14px;
+        gap: 5px;
+        font-size: 12px;
+    }
+
+    .login-container{
+        width: calc(100% - 24px);
+        padding-top: 85px;
+        padding-bottom: 30px;
+    }
+
+    .logo{
+        width: 90px;
+        margin-bottom: 25px;
+    }
+
+    .role-switch{
+        margin-bottom: 25px;
+    }
+
+    .role-switch button{
+        width: 82px;
+        height: 42px;
+        font-size: 13px;
+    }
+
+    .login-card{
+        width: 100%;
+        max-width: 340px;
+
+        padding: 24px 20px;
+        border-radius: 24px;
+    }
+
+    .login-card h2{
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .login-card input{
+        padding: 13px;
+        font-size: 16px;
+    }
+
+    .register{
+        margin-top: 24px;
+        font-size: 13px;
+    }
+}

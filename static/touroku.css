@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    min-height: 100vh;
+
+    background: url("child.JPG");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 40px 12px;
+    overflow-y: auto;
+}
+
+h2{
+    width: fit-content;
+    max-width: 100%;
+
+    text-align: center;
+    margin: 0 0 30px;
+
+    background: white;
+    padding: 15px 40px;
+    border-radius: 30px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+    font-size: 26px;
+}
+
+form{
+    width: 100%;
+    max-width: 320px;
+
+    background: white;
+    padding: 35px;
+    border-radius: 35px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
+    text-align: center;
+}
+
+input,
+select{
+    width: 100%;
+
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+
+    background: #f3f3f3;
+
+    font-size: 16px;
+}
+
+button{
+    width: 100%;
+
+    padding: 15px;
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 25px;
+
+    background: #d9b54d;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+/* ===== スマホ用 ===== */
+@media screen and (max-width: 430px){
+
+    body{
+        justify-content: flex-start;
+        padding: 28px 12px 40px;
+    }
+
+    h2{
+        font-size: 22px;
+        padding: 12px 28px;
+        margin-bottom: 22px;
+    }
+
+    form{
+        max-width: 340px;
+        padding: 24px 20px;
+        border-radius: 25px;
+    }
+
+    input,
+    select{
+        padding: 13px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    button{
+        padding: 14px;
+        font-size: 17px;
+    }
+}

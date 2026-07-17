@@ -1,0 +1,372 @@
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body{
+    background:url("parent.JPG");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+.container{
+    width:100%;
+    margin:auto;
+
+    min-height:100vh;
+    padding-bottom:100px; /* ←追加 */
+    box-sizing:border-box;
+}
+
+header{
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    padding: 0 15px;
+
+    background: #ECE6D8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    width:75px;
+}
+
+.page-title{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.input-card{
+    width:430px;
+    max-width:100%;
+    box-sizing:border-box;
+
+    margin:30px auto;
+
+    background:white;
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.card h2{
+
+    margin-top:0;
+
+    margin-bottom:25px;
+
+    font-size:28px;
+}
+
+.title-input{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:15px;
+
+    font-size:18px;
+
+    margin-bottom:25px;
+}
+
+.reward-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.reward-row input{
+
+    width:120px;
+
+    padding:10px;
+}
+
+.color-title{
+
+    display:block;
+
+    margin-bottom:15px;
+
+    font-weight:bold;
+}
+
+.color-list{
+
+    display:flex;
+
+    gap:15px;
+    margin-left: 20px;
+    margin-bottom:30px;
+}
+
+.color{
+
+    width:20px;
+
+    height:20px;
+    margin-top: 5px;
+    margin: 5px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+}
+
+.selected{
+
+    border:2px solid black;
+}
+
+.add-btn{
+    width:430px;
+    max-width:100%;
+
+    display:block;
+    margin:20px auto;
+
+    border:none;
+    border-radius:30px;
+    padding:18px;
+
+    background:#F5C84C;
+
+    font-size:22px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.help-list{
+    width:95%;
+    max-width:430px;
+
+    margin:30px auto;
+}
+
+.help-card{
+    width:95%;
+    max-width:100%;
+    box-sizing:border-box;
+
+    margin:15px auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.dot{
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+}
+
+.title{
+
+    font-size:20px;
+
+    font-weight:bold;
+}
+
+.reward{
+
+    color:#666;
+
+    margin-top:5px;
+}
+
+.right{
+
+    display:flex;
+
+    gap:15px;
+
+    font-size:24px;
+}
+
+.edit,
+.delete{
+
+    text-decoration:none;
+}
+
+.return{
+    display:flex;
+    justify-content:center;
+    align-items:center;	
+}
+
+.bottom-nav{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 100%;
+    height: 65px;
+    
+    background:#f5f5f5;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 ;
+    border-top: 1px solid #b2b0aa;
+}
+
+.bottom-nav a{
+    text-decoration: none;
+    color: #999;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-nav img{
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 5px;
+}
+
+.bottom-nav p{
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ===== スマホ用 ===== */
+@media screen and (max-width: 430px){
+    header{
+        width: 100vw;
+        max-width: none;
+        margin: 0;
+        padding: 0 12px;
+    }
+
+    .container{
+        padding: 0 12px 100px;
+    }
+
+    .input-card{
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .card h2{
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .title-input{
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .reward-row{
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .reward-row input{
+        width: 100px;
+        font-size: 16px;
+    }
+
+    .color-list{
+        gap: 10px;
+        margin-left: 0;
+        flex-wrap: wrap;
+    }
+
+    .color{
+        width: 24px;
+        height: 24px;
+    }
+
+    .add-btn{
+        width: 100%;
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    .help-list{
+        width: 100%;
+    }
+
+    .help-card{
+        width: 100%;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .title{
+        font-size: 18px;
+    }
+
+    .reward{
+        font-size: 14px;
+    }
+
+    .right{
+        gap: 10px;
+        font-size: 20px;
+    }
+
+    .bottom-nav img{
+        width: 34px;
+        height: 34px;
+    }
+
+    .bottom-nav p{
+        font-size: 11px;
+    }
+}
