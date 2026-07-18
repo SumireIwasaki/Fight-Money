@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="{{ url_for('static', filename='add_shift.css') }}?v=20260717">
+<link rel="stylesheet" href="{{ url_for('static', filename='Add_shift.css') }}?v=20260717">
 <title>シフト追加</title>
 </head>
 
@@ -11,7 +11,7 @@
 <div class="container">
 
     <h1>シフト追加</h1>
-    <form action="/save_shift" method="POST">
+    <form action="/save_shift" method="POST" id="shift-form">
 	<input type="hidden" name="help_id" id="help_id">
 	<input type="hidden" name="done_date" value="{{ selected_date }}">
    
@@ -48,25 +48,29 @@
 
 </div>
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-const cards = document.querySelectorAll(".help-card");
-const helpId = document.getElementById("help_id");
+    const cards = document.querySelectorAll(".help-card");
+    const helpId = document.getElementById("help_id");
+    const form = document.getElementById("shift-form");
 
-cards.forEach(card => {
+    form.addEventListener("submit", function (e) {
+        if (helpId.value === "") {
+            e.preventDefault();
+            alert("お手伝いを選択してください");
+        }
+    });
 
-    card.addEventListener("click", function(){
+    cards.forEach(card => {
+        card.addEventListener("click", function () {
 
-        // 全部の選択を解除
-        cards.forEach(c=>{
-            c.classList.remove("selected");
+            cards.forEach(c => {
+                c.classList.remove("selected");
+            });
+
+            this.classList.add("selected");
+            helpId.value = this.dataset.id;
         });
-
-        // 選択したカード
-        this.classList.add("selected");
-
-        // hiddenにhelp_idを入れる
-        helpId.value = this.dataset.id;
-
     });
 
 });
