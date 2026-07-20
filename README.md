@@ -2,8 +2,7 @@
 
 親子で頑張る力を育てる
 お手伝い管理アプリ
-<img width="590" height="1278" alt="IMG_5468" src="https://github.com/user-attachments/assets/cbe2f066-34d6-4fbb-bc7a-7c3a63a755b8" />
-<img width="590" height="1278" alt="IMG_5471" src="https://github.com/user-attachments/assets/52388bc1-2164-4b76-987b-2cad09ae2728" />
+<img width="590" height="1278" alt="IMG_5468" src="https://github.com/user-attachments/assets/cbe2f066-34d6-4fbb-bc7a-7c3a63a755b8" />　<img width="590" height="1278" alt="IMG_5471" src="https://github.com/user-attachments/assets/52388bc1-2164-4b76-987b-2cad09ae2728" />
 
 ## 1.アプリ概要
 
@@ -39,20 +38,20 @@ Fight Moneyは、親子でお手伝いとおこづかいを管理するWebアプ
 
 ## 4.使用技術
 
-フロントエンド
-  HTML
-  CSS
+・フロントエンド
+  HTML、
+  CSS、
   JavaScript
-バックエンド
-  Python
-  Flask
-データベース
+・バックエンド
+  Python、
+  Flask、
+・データベース
   SQLite
-ライブラリ
+・ライブラリ
   FullCalendar
-その他
-  Git
-  GitHub
+・その他
+  Git、
+  GitHub、
   GitHub Pages
 
 ## 5.主な機能
