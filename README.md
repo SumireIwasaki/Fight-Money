@@ -38,18 +38,18 @@ Fight Moneyは、親子でお手伝いとおこづかいを管理するWebアプ
 
 ## 4.使用技術
 
-・フロントエンド
+・フロントエンド：
   HTML、
   CSS、
   JavaScript
-・バックエンド
+・バックエンド：
   Python、
-  Flask、
-・データベース
+  Flask
+・データベース：
   SQLite
-・ライブラリ
+・ライブラリ：
   FullCalendar
-・その他
+・その他：
   Git、
   GitHub、
   GitHub Pages
